@@ -118,7 +118,6 @@ def nbody(loops, reference, iterations):
     combs = list(itertools.combinations(BODIES.keys(), 2))
     
     for _ in range(loops):
-
         for _ in range(iterations):
             advance(BODIES, 0.01, combs)
         print(report_energy(BODIES, combs))
