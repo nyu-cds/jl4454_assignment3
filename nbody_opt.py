@@ -15,7 +15,6 @@ import timeit
 import itertools
 
 
-
 def advance(BODIES, dt, combs):
     '''
         advance the system one timestep
