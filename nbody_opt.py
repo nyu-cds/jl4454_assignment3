@@ -9,29 +9,30 @@ import timeit
 import itertools
 
 
-def advance(BODIES, dt, combs):
+def advance(BODIES, dt, combs, iterations):
     '''
         advance the system one timestep
-        '''
-    for (body1, body2) in combs:
-        ([x1, y1, z1], v1, m1) = BODIES[body1]
-        ([x2, y2, z2], v2, m2) = BODIES[body2]
-        (dx, dy, dz) = (x1-x2, y1-y2, z1-z2)
-        mag = dt * ((dx * dx + dy * dy + dz * dz) ** (-1.5))
-        b1 = m1 * mag
-        b2 = m2 * mag
-        v1[0] -= dx * b2
-        v1[1] -= dy * b2
-        v1[2] -= dz * b2
-        v2[0] += dx * b1
-        v2[1] += dy * b1
-        v2[2] += dz * b1
+    '''
+    for _ in range(iterations):
+        for (body1, body2) in combs:
+            ([x1, y1, z1], v1, m1) = BODIES[body1]
+            ([x2, y2, z2], v2, m2) = BODIES[body2]
+            (dx, dy, dz) = (x1-x2, y1-y2, z1-z2)
+            mag = dt * ((dx * dx + dy * dy + dz * dz) ** (-1.5))
+            b1 = m1 * mag
+            b2 = m2 * mag
+            v1[0] -= dx * b2
+            v1[1] -= dy * b2
+            v1[2] -= dz * b2
+            v2[0] += dx * b1
+            v2[1] += dy * b1
+            v2[2] += dz * b1
 
-    for body in BODIES.keys():
-        (r, [vx, vy, vz], m) = BODIES[body]
-        r[0] += dt * vx
-        r[1] += dt * vy
-        r[2] += dt * vz
+        for body in BODIES.keys():
+            (r, [vx, vy, vz], m) = BODIES[body]
+            r[0] += dt * vx
+            r[1] += dt * vy
+            r[2] += dt * vz
 
 
 def report_energy(BODIES, combs, e=0.0):
@@ -118,8 +119,7 @@ def nbody(loops, reference, iterations):
     combs = list(itertools.combinations(BODIES.keys(), 2))
     
     for _ in range(loops):
-        for _ in range(iterations):
-            advance(BODIES, 0.01, combs)
+        advance(BODIES, 0.01, combs, iterations)
         print(report_energy(BODIES, combs))
 
 if __name__ == '__main__':
