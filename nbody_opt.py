@@ -1,9 +1,3 @@
-
-# coding: utf-8
-
-# In[4]:
-
-
 """
     N-body simulation.
     Final version
@@ -124,7 +118,7 @@ def nbody(loops, reference, iterations):
     combs = list(itertools.combinations(BODIES.keys(), 2))
     
     for _ in range(loops):
-        report_energy(BODIES, combs)
+
         for _ in range(iterations):
             advance(BODIES, 0.01, combs)
         print(report_energy(BODIES, combs))
@@ -133,7 +127,7 @@ if __name__ == '__main__':
     get_ipython().magic("timeit nbody(100, 'sun', 20000)")
 
 
-# In[ ]:
+
 
 
 
