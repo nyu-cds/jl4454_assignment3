@@ -21,6 +21,9 @@ def advance(dict BODIES, float dt, list combs, int iterations):
     '''
         advance the system one timestep
     '''
+    cdef list v1, v2, r
+    cdef float x1, x2, y1, y2, z1, z2, m1, m2, mag, b1, b2, dx, dy, dz, m, vx, vy, vz
+
     for _ in itertools.chain(range(iterations)):
         for (body1, body2) in combs:
             ([x1, y1, z1], v1, m1) = BODIES[body1]
@@ -48,7 +51,7 @@ def report_energy(dict BODIES, list combs, float e=0.0):
         compute the energy and return it so that it can be printed
         '''
     cdef list v1, v2, r
-    cdef x1, x2, y1, y2, z1, z2, m1, m2, dx, dy, dz, vx, vy, vz
+    cdef float x1, x2, y1, y2, z1, z2, m1, m2, dx, dy, dz, vx, vy, vz
     for (body1, body2) in combs:
         ((x1, y1, z1), v1, m1) = BODIES[body1]
         ((x2, y2, z2), v2, m2) = BODIES[body2]
