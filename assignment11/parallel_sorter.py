@@ -24,8 +24,8 @@ def parallel_sorter():
         #slice the array
         
         for i in range(size):
-            #add the elements to different ranges
-            data_final.append(data[(data>min_n+split_pt*(i-1)) & (data<=min_n+split_pt*(i))])
+            #get the elements which belong to different ranges and add them to a big array
+            data_final.append(data[(data > min_n + split_pt * (i-1)) & (data <= min_n + split_pt * (i))])
     else:
         #if this's not process 0, the data_final shouldn't make sense
         data_final = None
